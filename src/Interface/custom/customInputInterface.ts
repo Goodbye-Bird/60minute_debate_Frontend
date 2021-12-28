@@ -5,5 +5,7 @@ export interface CustomInputProps {
     style?: React.CSSProperties;
     maxLength?: number;
     onClick?: any;
+    onChange?: any;
     className?: string;
+    name?:string;
   }

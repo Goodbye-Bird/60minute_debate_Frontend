@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
-import Token from "../../lib/Token";
+import Token from "../../../lib/Token";
 import { FC } from "react";
-import LoginPage from "../../page/LoginPage";
+import LoginPage from "../../../page/LoginPage";
 
 interface ICustomRouteProps {
   path: string | string[];

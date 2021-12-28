@@ -1,10 +1,15 @@
 import React, { FC,useState } from "react";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store/userDataAtom";
-import {CustomInput} from "../Common/customInput/CustomInput"
+import CustomInput from "../Common/customInput"
+
 const Register: FC = () => {
   
   const [userData,setUserData ] = useRecoilState(userInfo)
+
+  const postData = ()=>{
+    
+  }
 
   return (
     <div>
@@ -19,11 +24,14 @@ const Register: FC = () => {
                     <label>
                       이메일 <span className="text-danger">*</span>
                     </label>
-                    <input
+                    <CustomInput
                       type="text"
-                      name="fname"
+                      name="fname"  
                       className="form-control"
                       placeholder="Enter Email"
+                      onChange={(e:any)=>{
+                        setUserData((prev)=>({...prev,email:e.target.value}))
+                      }}
                     />
                   </div>
 
@@ -31,11 +39,14 @@ const Register: FC = () => {
                     <label>
                       이름 <span className="text-danger">*</span>
                     </label>
-                    <input
+                    <CustomInput
                       type="text"
                       name="Lname"
                       className="form-control"
                       placeholder="Enter Name"
+                      onChange={(e:any)=>{
+                        setUserData((prev)=>({...prev,name:e.target.value}))
+                      }}
                     />
                   </div>
 
@@ -43,11 +54,14 @@ const Register: FC = () => {
                     <label>
                       비밀번호 <span className="text-danger">*</span>
                     </label>
-                    <input
+                    <CustomInput
                       type="password"
                       name="password"
                       className="form-control"
                       placeholder="Enter Password"
+                      onChange={(e:any)=>{
+                        setUserData((prev)=>({...prev,pw:e.target.value}))
+                      }}
                     />
                   </div>
 
@@ -55,17 +69,19 @@ const Register: FC = () => {
                     <label>
                       비밀번호 확인 <span className="text-danger">*</span>
                     </label>
-                    <input
+                    <CustomInput
                       type="password"
                       name="confirmpassword"
                       className="form-control"
                       placeholder="Confirm Password"
+                      onChange={(e:any)=>{
+                        setUserData((prev)=>({...prev,checkPw:e.target.value}))
+                      }}
                     />
                   </div>
                   <div className="col-md-12">
-                    <button className="btn btn-primary float-end">
-                      Signup Now
-                    </button>
+                    <CustomInput className="btn btn-primary float-end" type="button" onClick={postData}/>
+                    
                   </div>
                 </div>
               </form>

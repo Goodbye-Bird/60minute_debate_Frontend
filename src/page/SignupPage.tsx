@@ -1,5 +1,8 @@
+import Register from "../components/Register";
 const SignupPage: React.FC = () => {
-  return <div>회원가입 페이지</div>;
+  return (
+    <Register></Register>
+  );
 };
 
 export default SignupPage;

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CustomRoute from "./components/Common/CustomRoute";
 import Header from "./components/Header";
+import CustomRoute from "./components/Common/customRoute/CustomRoute";
 import * as P from "./page";
 
 const App: React.FC = () => {

@@ -9,8 +9,6 @@ interface ICustomRouteProps {
 }
 
 const CustomRoute: React.FC<ICustomRouteProps> = ({ path, component }) => {
-  console.log(Token.getToken());
-
   return (
     <Route
       exact

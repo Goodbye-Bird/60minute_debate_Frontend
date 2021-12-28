@@ -1,7 +1,12 @@
 import React from "react";
+import Main from "../components/Main";
 
 const MainPage: React.FC = () => {
-  return <div>메인 페이지</div>;
+  return (
+    <section id="main">
+      <Main />
+    </section>
+  );
 };
 
 export default MainPage;

@@ -2,9 +2,19 @@ import React, { MouseEvent, useCallback, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import useSocket from "../../hooks/socket/useSocket";
 import quertString from "query-string";
-import { RoomContaienr, RoomTitle, RoomWrap } from "./Room.style";
+import {
+  RoomChatWrap,
+  RoomContaienr,
+  RoomInput,
+  RoomInputWrap,
+  RoomSendBtn,
+  RoomTitle,
+  RoomTitleWrap,
+  RoomWrap,
+} from "./Room.style";
 import Message from "./Message/Message";
 import { IMessage } from "../../Interface/Message/IMessage";
+import useSocketHandle from "../../hooks/useSocketHandle";
 
 const Room: React.FC = () => {
   const { search } = useLocation();
@@ -14,21 +24,20 @@ const Room: React.FC = () => {
   const [serverMessages, setServerMessages] = useState<IMessage[]>([]);
 
   const { name, room } = quertString.parse(search);
-
   const socket = useSocket();
+  const { onExit } = useSocketHandle();
 
   useEffect(() => {
     console.log(name, room);
     socket.current.emit("join", { name, room }, (error: any) => {
       if (error) {
-        window.alert(error);
+        history.push("/main");
       }
     });
   }, []);
 
   const sendMessage = useCallback(
     (event: MouseEvent) => {
-      console.log("DSada");
       event.preventDefault();
       if (message) {
         socket.current.emit("sendMessage", message, setMessage(""));
@@ -37,13 +46,8 @@ const Room: React.FC = () => {
     [message]
   );
 
-  const onExit = () => {
-    history.push("/main");
-  };
-
   useEffect(() => {
     socket.current.on("message", (messages: IMessage) => {
-      console.log(messages);
       setServerMessages([...serverMessages, messages]);
     });
     socket.current.on("roomData", ({ users }: { users: any }) => {
@@ -54,22 +58,28 @@ const Room: React.FC = () => {
   return (
     <RoomContaienr>
       <RoomWrap>
-        <RoomTitle>방제목 : {room}</RoomTitle>
-        <input
-          onChange={(e) => {
-            setMessage(e.target.value);
-          }}
-          value={message}
-        />
-        <button onClick={(e) => sendMessage(e as MouseEvent)} />
-        {serverMessages && (
-          <div>
-            채팅 기록
-            {serverMessages.map((item, index) => {
-              return <Message key={index} message={item} name={name} />;
-            })}
-          </div>
-        )}
+        <RoomTitleWrap>
+          <RoomTitle>방제목 : {room}</RoomTitle>
+          <button onClick={onExit}>나가기</button>
+        </RoomTitleWrap>
+        <RoomChatWrap>
+          {serverMessages && (
+            <div>
+              {serverMessages.map((item, index) => {
+                return <Message key={index} message={item} name={name} />;
+              })}
+            </div>
+          )}
+        </RoomChatWrap>
+        <RoomInputWrap>
+          <RoomInput
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
+            value={message}
+          />
+          <RoomSendBtn onClick={(e) => sendMessage(e as MouseEvent)} />
+        </RoomInputWrap>
       </RoomWrap>
     </RoomContaienr>
   );

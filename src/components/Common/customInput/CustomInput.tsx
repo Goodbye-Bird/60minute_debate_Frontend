@@ -22,9 +22,6 @@ const CustomInput = ({
             value={value}
             name={name}
             placeholder={placeholder}
-            onChange={(e)=>{
-                setUserData((prev)=>({...prev,name:e.target.value}))
-            }}
         />
     )
 }

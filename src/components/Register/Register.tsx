@@ -1,16 +1,47 @@
-import React, { FC,useState } from "react";
+import axios from "axios";
+import React, { FC,useEffect,useState } from "react";
+import config from "../../config/config.json"
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store/userDataAtom";
 import CustomInput from "../Common/customInput"
+import swal from "sweetalert";
+import { Link, useHistory } from "react-router-dom";
 
 const Register: FC = () => {
   
   const [userData,setUserData ] = useRecoilState(userInfo)
+  const history = useHistory()
 
-  const postData = ()=>{
-    
+  const postData = () =>{
+    console.log(userData.checkPw,userData.pw)
+    if(userData.pw == userData.checkPw){
+      emailData();
+      axios.post(`${config.SERVER}/auth/join`,{
+        email: userData.email,
+        name: userData.name,
+        password: userData.pw,
+        password2:userData.checkPw
+      }).then(()=>{
+        swal("회원가입 성공!", "버튼을 클릭하세요!", "success").then(()=>{
+          history.push('/')
+        })
+      }).catch((e)=>{
+        console.log(e)
+      })
+    }
+    else{
+      swal("비밀번호가 다릅니다");
+    }
   }
 
+  const emailData = () =>{
+    axios.post(`${config.SERVER}/auth/join/mailCheck`,{
+      email: userData.email
+    }).then(()=>{
+      console.log("pass")
+    })
+     
+  }
   return (
     <div>
       <div className="container">
@@ -24,7 +55,7 @@ const Register: FC = () => {
                     <label>
                       이메일 <span className="text-danger">*</span>
                     </label>
-                    <CustomInput
+                    <input
                       type="text"
                       name="fname"  
                       className="form-control"
@@ -39,7 +70,7 @@ const Register: FC = () => {
                     <label>
                       이름 <span className="text-danger">*</span>
                     </label>
-                    <CustomInput
+                    <input
                       type="text"
                       name="Lname"
                       className="form-control"
@@ -54,7 +85,7 @@ const Register: FC = () => {
                     <label>
                       비밀번호 <span className="text-danger">*</span>
                     </label>
-                    <CustomInput
+                    <input
                       type="password"
                       name="password"
                       className="form-control"
@@ -69,7 +100,7 @@ const Register: FC = () => {
                     <label>
                       비밀번호 확인 <span className="text-danger">*</span>
                     </label>
-                    <CustomInput
+                    <input
                       type="password"
                       name="confirmpassword"
                       className="form-control"
@@ -80,13 +111,13 @@ const Register: FC = () => {
                     />
                   </div>
                   <div className="col-md-12">
-                    <CustomInput className="btn btn-primary float-end" type="button" onClick={postData}/>
+                    <input className="btn btn-primary float-end" type="button" onClick={postData} value="signUP"/>
                     
                   </div>
                 </div>
               </form>
               <p className="text-center mt-3 text-secondary">
-                If you have account, Please <a href="#">Login Now</a>
+                If you have account, Please <Link to="/">로그인 하기</Link>
               </p>
             </div>
           </div>

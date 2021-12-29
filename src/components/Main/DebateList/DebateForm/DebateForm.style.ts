@@ -5,7 +5,10 @@ export const DebateFormWrap = styled.div`
   flex-direction: column;
 `;
 
-export const DebateFormContainer = styled.div<{ isClick: boolean }>`
+export const DebateFormContainer = styled.button<{
+  isClick: boolean;
+  isCheck: boolean;
+}>`
   width: 100%;
   height: 70px;
   border: 1px solid #dbdbdb;

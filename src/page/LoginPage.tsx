@@ -1,8 +1,11 @@
 import Token from "../lib/Token";
+import Login from "../components/Login";
 
 const LoginPage: React.FC = () => {
   console.log(Token.getToken());
-  return <div>로그인 페이지</div>;
+  return (
+    <Login></Login>
+  );
 };
 
 export default LoginPage;

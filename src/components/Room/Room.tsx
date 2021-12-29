@@ -15,13 +15,15 @@ import {
 import Message from "./Message/Message";
 import { IMessage } from "../../Interface/Message/IMessage";
 import useSocketHandle from "../../hooks/useSocketHandle";
+import { useRecoilState } from "recoil";
+import { MessageData } from "../../store/messageDataAtom";
 
 const Room: React.FC = () => {
   const { search } = useLocation();
   const history = useHistory();
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
-  const [serverMessages, setServerMessages] = useState<IMessage[]>([]);
+  const [serverMessages, setServerMessages] = useRecoilState(MessageData);
 
   const { name, room } = quertString.parse(search);
   const socket = useSocket();
@@ -64,11 +66,11 @@ const Room: React.FC = () => {
         </RoomTitleWrap>
         <RoomChatWrap>
           {serverMessages && (
-            <div>
+            <>
               {serverMessages.map((item, index) => {
                 return <Message key={index} message={item} name={name} />;
               })}
-            </div>
+            </>
           )}
         </RoomChatWrap>
         <RoomInputWrap>

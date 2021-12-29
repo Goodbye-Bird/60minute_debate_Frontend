@@ -35,7 +35,14 @@ export const RoomChatWrap = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 15px;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const RoomInputWrap = styled.div`

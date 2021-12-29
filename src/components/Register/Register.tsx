@@ -112,7 +112,6 @@ const Register: FC = () => {
                   </div>
                   <div className="col-md-12">
                     <input className="btn btn-primary float-end" type="button" onClick={postData} value="Sign Up"/>
-                    
                   </div>
                 </div>
               </form>

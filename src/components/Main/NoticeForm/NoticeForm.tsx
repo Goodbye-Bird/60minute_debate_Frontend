@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { INoticeFormProps } from "../../../Interface/NoticeForm/INoticeForm";
 import { NoticeContainer, NoticeTime, NoticeTitle } from "./NoticeForm.style";

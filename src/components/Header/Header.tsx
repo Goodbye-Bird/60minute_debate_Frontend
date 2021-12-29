@@ -1,9 +1,12 @@
-import { HeaderContainer, HeaderWrap } from "./Header.style";
+import { HeaderContainer, HeaderImg, HeaderWrap } from "./Header.style";
+import Logo from "../assets/img/logo.png";
 
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
-      <HeaderWrap>sadasda</HeaderWrap>
+      <HeaderWrap>
+        <HeaderImg src={Logo} />
+      </HeaderWrap>
     </HeaderContainer>
   );
 };

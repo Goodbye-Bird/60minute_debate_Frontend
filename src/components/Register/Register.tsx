@@ -1,51 +1,61 @@
 import axios from "axios";
-import React, { FC,useEffect,useState } from "react";
-import config from "../../config/config.json"
+import { FC } from "react";
+import config from "../../config/config.json";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store/userDataAtom";
-import CustomInput from "../Common/customInput"
 import swal from "sweetalert";
 import { Link, useHistory } from "react-router-dom";
 
 const Register: FC = () => {
-  
-  const [userData,setUserData ] = useRecoilState(userInfo)
-  const history = useHistory()
+  const [userData, setUserData] = useRecoilState(userInfo);
+  const history = useHistory();
 
-  const postData = () =>{
-    console.log(userData.checkPw,userData.pw)
-    if(userData.pw == userData.checkPw){
+  const postData = () => {
+    console.log(userData.checkPw, userData.pw);
+    if (userData.pw == userData.checkPw) {
       emailData();
-      axios.post(`${config.SERVER}/auth/join`,{
-        email: userData.email,
-        name: userData.name,
-        password: userData.pw,
-        password2:userData.checkPw
-      }).then(()=>{
-        swal("회원가입 성공!", "버튼을 클릭하세요!", "success").then(()=>{
-          history.push('/')
+      axios
+        .post(`${config.SERVER}/auth/join`, {
+          email: userData.email,
+          name: userData.name,
+          password: userData.pw,
+          password2: userData.checkPw,
         })
-      }).catch((e)=>{
-        console.log(e)
-      })
-    }
-    else{
+        .then(() => {
+          swal("회원가입 성공!", "버튼을 클릭하세요!", "success").then(() => {
+            history.push("/");
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
       swal("비밀번호가 다릅니다");
     }
-  }
+  };
 
-  const emailData = () =>{
-    axios.post(`${config.SERVER}/auth/join/mailCheck`,{
-      email: userData.email
-    }).then(()=>{
-      console.log("pass")
-    })
-     
-  }
+  const emailData = () => {
+    axios
+      .post(`${config.SERVER}/auth/join/mailCheck`, {
+        email: userData.email,
+      })
+      .then(() => {
+        console.log("pass");
+      });
+  };
   return (
     <div>
-      <div className="container" style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100vw",height:"90vh"}}>
-        <div className="row" style={{width:"100vw"}}>
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "90vh",
+        }}
+      >
+        <div className="row" style={{ width: "100vw" }}>
           <div className="col-md-6 offset-md-3">
             <div className="signup-form">
               <form action="" className="mt-5 border p-4 bg-light shadow">
@@ -57,11 +67,14 @@ const Register: FC = () => {
                     </label>
                     <input
                       type="text"
-                      name="fname"  
+                      name="fname"
                       className="form-control"
                       placeholder="Enter Email"
-                      onChange={(e:any)=>{
-                        setUserData((prev)=>({...prev,email:e.target.value}))
+                      onChange={(e: any) => {
+                        setUserData((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }));
                       }}
                     />
                   </div>
@@ -75,8 +88,11 @@ const Register: FC = () => {
                       name="Lname"
                       className="form-control"
                       placeholder="Enter Name"
-                      onChange={(e:any)=>{
-                        setUserData((prev)=>({...prev,name:e.target.value}))
+                      onChange={(e: any) => {
+                        setUserData((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }));
                       }}
                     />
                   </div>
@@ -90,8 +106,11 @@ const Register: FC = () => {
                       name="password"
                       className="form-control"
                       placeholder="Enter Password"
-                      onChange={(e:any)=>{
-                        setUserData((prev)=>({...prev,pw:e.target.value}))
+                      onChange={(e: any) => {
+                        setUserData((prev) => ({
+                          ...prev,
+                          pw: e.target.value,
+                        }));
                       }}
                     />
                   </div>
@@ -105,13 +124,21 @@ const Register: FC = () => {
                       name="confirmpassword"
                       className="form-control"
                       placeholder="Confirm Password"
-                      onChange={(e:any)=>{
-                        setUserData((prev)=>({...prev,checkPw:e.target.value}))
+                      onChange={(e: any) => {
+                        setUserData((prev) => ({
+                          ...prev,
+                          checkPw: e.target.value,
+                        }));
                       }}
                     />
                   </div>
                   <div className="col-md-12">
-                    <input className="btn btn-primary float-end" type="button" onClick={postData} value="Sign Up"/>
+                    <input
+                      className="btn btn-primary float-end"
+                      type="button"
+                      onClick={postData}
+                      value="Sign Up"
+                    />
                   </div>
                 </div>
               </form>

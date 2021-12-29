@@ -15,7 +15,7 @@ const Main: React.FC = () => {
         <MainTitle>{getDate()}</MainTitle>
         <MainTitleLine />
         <NoticeForm
-          name={"임동현3"}
+          name={"정우재"}
           room={"학생회 안건"}
           time={"16:00 ~ 17:00"}
         />

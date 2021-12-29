@@ -31,11 +31,11 @@ const Login = () => {
     
         <main className="form-signin" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"60vw"}}>
           <div style={{width:"60%"}}>
-            <img className="mb-4" src={logo} width="200"/>
+            <img className="mb-4" src={logo} width="200" />
             {/* <img src={logo} alt="" /> */}
-            <h1 className="h3 mb-3 fw-normal">로그인</h1>
+            {/* <h1 className="h3 mb-3 fw-normal">로그인</h1> */}
         
-            <div className="form-floating">
+            <div className="form-floating" style={{marginTop:"30px"}}>
               <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e)=>{
                   setUserData((perv)=>({...perv,email:e.target.value}))
               }}/>
@@ -53,7 +53,7 @@ const Login = () => {
                 <input type="checkbox" value="remember-me"/> Remember me
               </label>
             </div> */}
-            <button className="w-100 btn btn-lg btn-primary" onClick={signIn} style={{marginTop:"20px"}}>Sign in</button>
+            <button className="w-100 btn btn-lg btn-primary" onClick={signIn} style={{marginTop:"20px"}}>Sign In</button>
             <p className="mt-5 mb-3 text-muted">60분토론이 처음이신가요?   <Link to="/signUp"> 회원가입 하기</Link></p>
           </div>
         </main>

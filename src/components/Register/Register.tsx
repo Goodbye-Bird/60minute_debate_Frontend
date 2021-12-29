@@ -44,8 +44,8 @@ const Register: FC = () => {
   }
   return (
     <div>
-      <div className="container">
-        <div className="row">
+      <div className="container" style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100vw",height:"90vh"}}>
+        <div className="row" style={{width:"100vw"}}>
           <div className="col-md-6 offset-md-3">
             <div className="signup-form">
               <form action="" className="mt-5 border p-4 bg-light shadow">
@@ -111,13 +111,13 @@ const Register: FC = () => {
                     />
                   </div>
                   <div className="col-md-12">
-                    <input className="btn btn-primary float-end" type="button" onClick={postData} value="signUP"/>
+                    <input className="btn btn-primary float-end" type="button" onClick={postData} value="Sign Up"/>
                     
                   </div>
                 </div>
               </form>
               <p className="text-center mt-3 text-secondary">
-                If you have account, Please <Link to="/">로그인 하기</Link>
+                이미 가입하셨나요? <Link to="/">로그인 하기</Link>
               </p>
             </div>
           </div>

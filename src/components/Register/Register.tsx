@@ -12,7 +12,7 @@ const Register: FC = () => {
 
   const postData = () => {
     console.log(userData.checkPw, userData.pw);
-    if (userData.pw == userData.checkPw) {
+    if (userData.pw === userData.checkPw) {
       emailData();
       axios
         .post(`${config.SERVER}/auth/join`, {

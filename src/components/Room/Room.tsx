@@ -1,10 +1,18 @@
-import React, { MouseEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import useSocket from "../../hooks/socket/useSocket";
 import quertString from "query-string";
 import {
   RoomChatWrap,
   RoomContaienr,
+  RoomExitButton,
+  RoomExitButtonImg,
   RoomInput,
   RoomInputWrap,
   RoomSendBtn,
@@ -30,7 +38,6 @@ const Room: React.FC = () => {
   const { onExit } = useSocketHandle();
 
   useEffect(() => {
-    console.log(name, room);
     socket.current.emit("join", { name, room }, (error: any) => {
       if (error) {
         history.push("/main");
@@ -39,7 +46,7 @@ const Room: React.FC = () => {
   }, []);
 
   const sendMessage = useCallback(
-    (event: MouseEvent) => {
+    (event: MouseEvent | FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (message) {
         socket.current.emit("sendMessage", message, setMessage(""));
@@ -62,7 +69,13 @@ const Room: React.FC = () => {
       <RoomWrap>
         <RoomTitleWrap>
           <RoomTitle>방제목 : {room}</RoomTitle>
-          <button onClick={onExit}>나가기</button>
+          <RoomExitButton onClick={onExit}>
+            <RoomExitButtonImg
+              src={
+                "https://cdn-icons.flaticon.com/png/512/2961/premium/2961937.png?token=exp=1640770804~hmac=fdea0fc6a9f87dedb1875ba7aaf94b2f"
+              }
+            />
+          </RoomExitButton>
         </RoomTitleWrap>
         <RoomChatWrap>
           {serverMessages && (
@@ -73,7 +86,9 @@ const Room: React.FC = () => {
             </>
           )}
         </RoomChatWrap>
-        <RoomInputWrap>
+        <RoomInputWrap
+          onSubmit={(e) => sendMessage(e as FormEvent<HTMLFormElement>)}
+        >
           <RoomInput
             onChange={(e) => {
               setMessage(e.target.value);

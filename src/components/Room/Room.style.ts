@@ -26,8 +26,26 @@ export const RoomTitleWrap = styled.div`
 `;
 
 export const RoomTitle = styled.h1`
-  font-size: 22px;
+  font-size: 20px;
   margin-right: auto;
+`;
+
+export const RoomExitButton = styled.button`
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border: 0px;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+`;
+
+export const RoomExitButtonImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
 `;
 
 export const RoomChatWrap = styled.div`
@@ -45,20 +63,30 @@ export const RoomChatWrap = styled.div`
   }
 `;
 
-export const RoomInputWrap = styled.div`
-  width: 100%;
+export const RoomInputWrap = styled.form`
+  width: 672px;
   min-height: 50px;
   display: flex;
-  margin-top: auto;
+  margin: auto;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid #dbdbdb;
 `;
 
 export const RoomInput = styled.input`
   width: 100%;
   box-sizing: border-box;
+  border: 0px;
+  outline: none;
+
+  &:disabled {
+    background-color: #ccc;
+  }
 `;
 
 export const RoomSendBtn = styled.button`
   min-width: 40px;
   height: 100%;
   box-sizing: border-box;
+  border: 0px;
 `;

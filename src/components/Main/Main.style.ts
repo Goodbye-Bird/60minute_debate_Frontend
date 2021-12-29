@@ -13,3 +13,12 @@ export const MainWrap = styled.div`
   row-gap: 15px;
   padding: 60px 0px;
 `;
+
+export const MainTitle = styled.h1`
+  font-size: 30px;
+`;
+
+export const MainTitleLine = styled.hr`
+  width: 100%;
+  border: 1px solid #dbdbdb;
+`;

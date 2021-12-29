@@ -1,12 +1,19 @@
-import React, { useState } from "react";
-import { MainContainer, MainWrap } from "./Main.style";
-import { Link } from "react-router-dom";
+import React from "react";
+import { getDate } from "../../util/getDate";
+import {
+  MainContainer,
+  MainTitle,
+  MainTitleLine,
+  MainWrap,
+} from "./Main.style";
 import NoticeForm from "./NoticeForm";
 
 const Main: React.FC = () => {
   return (
     <MainContainer>
       <MainWrap>
+        <MainTitle>{getDate()}</MainTitle>
+        <MainTitleLine />
         <NoticeForm
           name={"임동현3"}
           room={"학생회 안건"}

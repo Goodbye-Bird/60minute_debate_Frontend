@@ -6,7 +6,7 @@ const useSocket = () => {
   const socketRef: any = useRef<any>();
 
   useEffect(() => {
-    socketRef.current = io.connect(config.SERVER, {
+    socketRef.current = io.connect(`${config.SERVER}`, {
       transports: ["websocket"],
     });
   }, []);

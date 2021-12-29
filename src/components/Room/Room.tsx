@@ -1,13 +1,17 @@
 import React, { MouseEvent, useCallback, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useSocket from "../../hooks/socket/useSocket";
 import quertString from "query-string";
+import { RoomContaienr, RoomTitle, RoomWrap } from "./Room.style";
+import Message from "./Message/Message";
+import { IMessage } from "../../Interface/Message/IMessage";
 
 const Room: React.FC = () => {
   const { search } = useLocation();
+  const history = useHistory();
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
-  const [serverMessages, setServerMessages] = useState<string[]>([]);
+  const [serverMessages, setServerMessages] = useState<IMessage[]>([]);
 
   const { name, room } = quertString.parse(search);
 
@@ -33,9 +37,14 @@ const Room: React.FC = () => {
     [message]
   );
 
+  const onExit = () => {
+    history.push("/main");
+  };
+
   useEffect(() => {
-    socket.current.on("message", (messages: any) => {
-      setServerMessages([...serverMessages, messages.text]);
+    socket.current.on("message", (messages: IMessage) => {
+      console.log(messages);
+      setServerMessages([...serverMessages, messages]);
     });
     socket.current.on("roomData", ({ users }: { users: any }) => {
       setUsers(users);
@@ -43,24 +52,26 @@ const Room: React.FC = () => {
   }, [serverMessages]);
 
   return (
-    <div>
-      <div>방제목 : {room}</div>
-      <input
-        onChange={(e) => {
-          setMessage(e.target.value);
-        }}
-        value={message}
-      />
-      <button onClick={(e) => sendMessage(e as MouseEvent)} />
-      {serverMessages && (
-        <div>
-          채팅 기록
-          {serverMessages.map((item, index) => {
-            return <div key={index}>{item}</div>;
-          })}
-        </div>
-      )}
-    </div>
+    <RoomContaienr>
+      <RoomWrap>
+        <RoomTitle>방제목 : {room}</RoomTitle>
+        <input
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+          value={message}
+        />
+        <button onClick={(e) => sendMessage(e as MouseEvent)} />
+        {serverMessages && (
+          <div>
+            채팅 기록
+            {serverMessages.map((item, index) => {
+              return <Message key={index} message={item} name={name} />;
+            })}
+          </div>
+        )}
+      </RoomWrap>
+    </RoomContaienr>
   );
 };
 

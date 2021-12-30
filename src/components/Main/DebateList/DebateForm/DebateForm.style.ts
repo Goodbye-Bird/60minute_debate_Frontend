@@ -61,12 +61,6 @@ export const DebateFormInputWrap = styled.div<{ isClick: boolean }>`
 
   align-items: center;
   padding: 0px 20px;
-
-  div {
-    width: 50%;
-    display: flex;
-    align-items: center;
-  }
 `;
 
 export const DebateFormInputText = styled.p`
@@ -74,6 +68,6 @@ export const DebateFormInputText = styled.p`
 `;
 
 export const DebateFormInput = styled.input`
-  width: 80%;
+  width: 88%;
   margin-left: auto;
 `;

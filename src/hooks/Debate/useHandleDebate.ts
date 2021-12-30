@@ -1,21 +1,18 @@
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { sendMakeDebateData } from "../../API/Debate/Debate.api";
-import {
-  clickDebateAtom,
-  debateName,
-  debateText,
-} from "../../store/clickDebateAtom";
+import { clickDebateAtom, debateText } from "../../store/clickDebateAtom";
+import { userInfo } from "../../store/userDataAtom";
 
 const useHandleDebate = () => {
   const [debateTextData, setDebateTextData] = useRecoilState(debateText);
-  const [debateNameData, setDebateNameData] = useRecoilState(debateName);
   const [clickDebates, setClickDebates] = useRecoilState(clickDebateAtom);
+  const [userData, setUserData] = useRecoilState(userInfo);
   const history = useHistory();
 
   const onMakeRoom = async (currentClickDebate: number) => {
     const { status } = await sendMakeDebateData(
-      debateNameData,
+      userData.name,
       currentClickDebate + 1,
       debateTextData
     );
@@ -23,7 +20,6 @@ const useHandleDebate = () => {
     if (status === 200) {
       history.push("/main");
       setDebateTextData("");
-      setDebateNameData("");
       setClickDebates([]);
     }
   };

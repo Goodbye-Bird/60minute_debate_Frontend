@@ -3,7 +3,6 @@ import { useRecoilState } from "recoil";
 import useDebate from "../../../hooks/Debate/useDebateList";
 import useHandleDebate from "../../../hooks/Debate/useHandleDebate";
 import useModal from "../../../hooks/Main/useModal";
-import { IDebateRes } from "../../../Interface/Debate/IDebate";
 import {
   clickDebateAtom,
   currentClickDebate,

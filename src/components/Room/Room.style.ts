@@ -85,7 +85,7 @@ export const RoomInput = styled.input`
 `;
 
 export const RoomSendBtn = styled.button`
-  min-width: 40px;
+  min-width: 80px;
   height: 100%;
   box-sizing: border-box;
   border: 0px;

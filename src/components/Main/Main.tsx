@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import useModal from "../../hooks/Main/useModal";
 import { useRecoilState } from "recoil";
@@ -14,15 +14,33 @@ import {
   MainWrap,
 } from "./Main.style";
 import NoticeForm from "./NoticeForm";
+import useDebate from "../../hooks/Debate/useDebateList";
+import { debateRoomList } from "../../store/clickDebateAtom";
+import { Item } from "framer-motion/types/components/Reorder/Item";
+import { userInfo } from "../../store/userDataAtom";
 
 const Main: React.FC = () => {
   const debateListMatch = useRouteMatch("/main/debatelist");
+  const [currentDebateList, setCurrentDebateList] =
+    useRecoilState(debateRoomList);
+
+  const [userData, setUserData] = useRecoilState(userInfo);
 
   const { onBoxClick } = useModal();
+
+  const { loadDebateList } = useDebate();
 
   useTimeer();
 
   const [timer, setTimeer] = useRecoilState(timeData);
+
+  useEffect(() => {
+    console.log(currentDebateList);
+  }, [currentDebateList]);
+
+  useEffect(() => {
+    loadDebateList();
+  }, []);
 
   return (
     <MainContainer>
@@ -32,30 +50,14 @@ const Main: React.FC = () => {
           <MainOnListModal onClick={onBoxClick}>토론 추가+</MainOnListModal>
         </MainTitleWrap>
         <MainTitleLine />
-        <NoticeForm
-          name={"임동현"}
-          room={"학생회 안건"}
-          time={"16:00 ~ 17:00"}
-          overTime={"05:15"}
-        />
-        <NoticeForm
-          name={"임동현2"}
-          room={"1"}
-          time={"16:00 ~ 17:00"}
-          overTime="4:00"
-        />
-        <NoticeForm
-          name={"sdasdssa"}
-          room={"바인드 회의"}
-          time={"17:00 ~ 18:00"}
-          overTime="08:22"
-        />
-        <NoticeForm
-          name={"임동현2"}
-          room={"학교 재정 안건"}
-          time={"18:00 ~ 19:00"}
-          overTime="19:00"
-        />
+        {currentDebateList.map((item) => (
+          <NoticeForm
+            name={userData.name}
+            room={item.room}
+            time={`${item.time - 1}시 ~ ${item.time}시`}
+            overTime={String(item.time).padStart(2, "0") + ":00"}
+          />
+        ))}
       </MainWrap>
       {debateListMatch && <DebateList />}
     </MainContainer>

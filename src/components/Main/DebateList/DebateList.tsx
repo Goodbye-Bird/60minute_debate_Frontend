@@ -31,7 +31,6 @@ const DebateList: React.FC = () => {
   const [debateTextData, setDebateTextData] = useRecoilState(debateText);
 
   useEffect(() => {
-    handleDebateList();
     setIsLoading(false);
   }, []);
 
@@ -41,6 +40,11 @@ const DebateList: React.FC = () => {
       window.location.reload();
     }
   }, [clickDebates]);
+
+  const timeList = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23,
+  ];
 
   return (
     <>
@@ -60,14 +64,9 @@ const DebateList: React.FC = () => {
             "loading..."
           ) : (
             <>
-              {debateDataList?.map((item, index) => {
+              {timeList?.map((item, index) => {
                 return (
-                  <DebateForm
-                    index={index}
-                    toTime={index + 1}
-                    key={index}
-                    isCheck={item}
-                  />
+                  <DebateForm index={item} toTime={item + 1} key={index} />
                 );
               })}
             </>

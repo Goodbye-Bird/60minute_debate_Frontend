@@ -6,7 +6,7 @@ import { userInfo } from "../../store/userDataAtom";
 import { useHistory } from 'react-router-dom';
 import logo from "../assets/img/logo.png";
 import { Link } from "react-router-dom";
-
+import swal from "sweetalert"
 
 const Login = () => {
 
@@ -23,6 +23,8 @@ const Login = () => {
             const token = e.data.token
             localStorage.setItem("access-token",token)
             history.push('/main');
+        }).catch(()=>{
+            swal("로그인 실패!")
         })
     }
 

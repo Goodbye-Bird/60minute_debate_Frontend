@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 interface IDebateFormContainerProps {
   isClick: boolean;
-  isCheck: boolean;
 }
 
 export const DebateFormWrap = styled.div`

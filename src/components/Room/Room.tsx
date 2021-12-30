@@ -27,7 +27,7 @@ import { useRecoilState } from "recoil";
 import { MessageData } from "../../store/messageDataAtom";
 import { useTimeer } from "../../hooks/useTimeer";
 import { timeData } from "../../store/timerDataAtom";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
 const Room: React.FC = () => {
   const { search } = useLocation();
@@ -35,22 +35,26 @@ const Room: React.FC = () => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [serverMessages, setServerMessages] = useRecoilState(MessageData);
-  const [timer,setTimeer] = useRecoilState(timeData)
+  const [timer, setTimeer] = useRecoilState(timeData);
 
-  const { name, room , overTime } = quertString.parse(search);
+  const { name, room, overTime } = quertString.parse(search);
   const socket = useSocket();
   const { onExit } = useSocketHandle();
 
-  const rommOnexit = () =>{
-    if(timer.time == overTime ){
-      console.log('boom')
-      swal("회의가 종료되었습니다.", "버튼을 눌러 퇴장해주세요.", "success").then(()=>{
+  const rommOnexit = () => {
+    if (timer.time == overTime) {
+      console.log("boom");
+      swal(
+        "회의가 종료되었습니다.",
+        "버튼을 눌러 퇴장해주세요.",
+        "success"
+      ).then(() => {
         onExit();
-      })
+      });
     }
-  }
+  };
 
-  useTimeer()
+  useTimeer();
 
   useEffect(() => {
     rommOnexit();
@@ -111,7 +115,9 @@ const Room: React.FC = () => {
             }}
             value={message}
           />
-          <RoomSendBtn onClick={(e) => sendMessage(e as MouseEvent)} />
+          <RoomSendBtn onClick={(e) => sendMessage(e as MouseEvent)}>
+            전송
+          </RoomSendBtn>
         </RoomInputWrap>
       </RoomWrap>
     </RoomContaienr>

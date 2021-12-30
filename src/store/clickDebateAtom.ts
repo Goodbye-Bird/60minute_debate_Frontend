@@ -14,3 +14,14 @@ export const debateText = atom<string>({
   key: "debateText",
   default: "",
 });
+
+interface IdebateRoomListProps {
+  name: string;
+  room: string;
+  time: number;
+}
+
+export const debateRoomList = atom<IdebateRoomListProps[]>({
+  key: "debateRoomList",
+  default: [],
+});

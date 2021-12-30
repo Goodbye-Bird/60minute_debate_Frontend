@@ -9,8 +9,8 @@ const Header: React.FC = () => {
     <HeaderContainer>
       <HeaderWrap>
         <HeaderImg src={Logo} />
+        {token ? <Profile /> : null}
       </HeaderWrap>
-      {token ? <Profile></Profile> : null}
     </HeaderContainer>
   );
 };

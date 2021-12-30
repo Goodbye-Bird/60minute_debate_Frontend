@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import io from "socket.io-client";
+import React from "react";
 
-import config from "../config/config.json";
 import Room from "../components/Room/Room";
 
 const RoomPage: React.FC = () => {

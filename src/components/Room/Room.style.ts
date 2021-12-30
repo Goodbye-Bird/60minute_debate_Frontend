@@ -64,7 +64,7 @@ export const RoomChatWrap = styled.div`
 `;
 
 export const RoomInputWrap = styled.form`
-  width: 672px;
+  width: 95%;
   min-height: 50px;
   display: flex;
   margin: auto;

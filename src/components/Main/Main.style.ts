@@ -14,7 +14,22 @@ export const MainWrap = styled.div`
   padding: 60px 0px;
 `;
 
+export const MainTitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const MainTitle = styled.h1`
+  font-size: 30px;
+`;
+
+export const MainOnListModal = styled.button`
+  height: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  border: 0px;
+  background: none;
+  color: green;
   font-size: 30px;
 `;
 

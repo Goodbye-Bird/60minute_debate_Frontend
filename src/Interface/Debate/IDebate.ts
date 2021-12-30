@@ -10,3 +10,9 @@ export interface IDebateRes {
   error?: string;
   times?: boolean[];
 }
+
+export interface IMakeDebate {
+  name: string;
+  room: string;
+  time: number;
+}

@@ -1,14 +1,16 @@
 import styled, { css } from "styled-components";
 
+interface IDebateFormContainerProps {
+  isClick: boolean;
+  isCheck: boolean;
+}
+
 export const DebateFormWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const DebateFormContainer = styled.button<{
-  isClick: boolean;
-  isCheck: boolean;
-}>`
+export const DebateFormContainer = styled.button<IDebateFormContainerProps>`
   width: 100%;
   height: 70px;
   border: 1px solid #dbdbdb;
@@ -59,6 +61,12 @@ export const DebateFormInputWrap = styled.div<{ isClick: boolean }>`
 
   align-items: center;
   padding: 0px 20px;
+
+  div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const DebateFormInputText = styled.p`
@@ -66,6 +74,6 @@ export const DebateFormInputText = styled.p`
 `;
 
 export const DebateFormInput = styled.input`
-  width: 90%;
+  width: 80%;
   margin-left: auto;
 `;

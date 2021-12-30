@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import {
   clickDebateAtom,
   currentClickDebate,
+  debateName,
   debateText,
 } from "../../../../store/clickDebateAtom";
 import { IDebateFormProps } from "../../../../Interface/Debate/IDebate";
@@ -22,6 +23,7 @@ const DebateForm: React.FC<IDebateFormProps> = ({ index, toTime, isCheck }) => {
     useRecoilState(currentClickDebate);
 
   const [debateTextData, setDebateTextData] = useRecoilState(debateText);
+  const [debateNameData, setDebateNameData] = useRecoilState(debateName);
 
   const time = `${index}시 ~ ${toTime}시`;
 
@@ -45,11 +47,20 @@ const DebateForm: React.FC<IDebateFormProps> = ({ index, toTime, isCheck }) => {
         <DebateFormTime>{time}</DebateFormTime>
       </DebateFormContainer>
       <DebateFormInputWrap isClick={isClick}>
-        <DebateFormInputText>방제목 : </DebateFormInputText>
-        <DebateFormInput
-          value={debateTextData}
-          onChange={(event) => setDebateTextData(event?.target.value)}
-        />
+        <div>
+          <DebateFormInputText>방제목 : </DebateFormInputText>
+          <DebateFormInput
+            value={debateTextData}
+            onChange={(event) => setDebateTextData(event?.target.value)}
+          />
+        </div>
+        <div>
+          <DebateFormInputText>이름 : </DebateFormInputText>
+          <DebateFormInput
+            value={debateNameData}
+            onChange={(event) => setDebateNameData(event?.target.value)}
+          />
+        </div>
       </DebateFormInputWrap>
     </DebateFormWrap>
   );

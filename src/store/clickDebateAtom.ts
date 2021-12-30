@@ -14,3 +14,8 @@ export const debateText = atom<string>({
   key: "debateText",
   default: "",
 });
+
+export const debateName = atom<string>({
+  key: "debateName",
+  default: "",
+});

@@ -34,4 +34,5 @@ export const NoticeTitle = styled.h1`
 export const NoticeTime = styled.h2`
   font-size: 20px;
   font-weight: bold;
+  margin-left: 10px;
 `;
